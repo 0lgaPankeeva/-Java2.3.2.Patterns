@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static io.restassured.RestAssured.given;
 import static ru.netology.data.DataGenerator.*;
 import static ru.netology.data.DataGenerator.Registration.getRegisteredUser;
 import static ru.netology.data.DataGenerator.Registration.getUser;
@@ -16,14 +15,6 @@ public class AuthTest {
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
-        // сам запрос
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto("vasya", "password", "active")) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь относительно BaseUri отправляем запрос
-                .then() // "тогда ожидаем"
-                .statusCode(200); // код 200 OK
     }
 
     @Test
